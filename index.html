@@ -12,17 +12,31 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
 <link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
 <header class="wrap">
   <div class="top">
-    <a class="brand" href="index.html" aria-label="Приход Архистратига Михаила, на главную">
+    <div class="topbar">
+    <button class="lv-btn" type="button" aria-pressed="false" aria-label="Версия для слабовидящих"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5C6.5 5 2.6 9 1.5 12c1.1 3 5 7 10.5 7s9.400-4 10.500-7C21.400 9 17.500 5 12 5z" fill="none" stroke="currentColor" stroke-width="1.700" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.200" fill="currentColor"/></svg><span class="lv-btn-t">Версия для слабовидящих</span></button>
+    <div class="social">
+      <span class="social-lbl">Наши соцсети:</span>
+      <div class="social-list">
+        <a class="soc" href="https://vk.ru/hramtuapse" target="_blank" rel="noopener" aria-label="Страница храма ВКонтакте" title="Страница храма ВКонтакте"><img class="soc-ic" src="img/vk.png" width="34" height="34" alt="" aria-hidden="true"><span class="soc-t">Храм</span></a>
+        <a class="soc" href="https://vk.ru/prav_molod_tuapse" target="_blank" rel="noopener" aria-label="Православная молодёжь «ПроСветЪ» ВКонтакте" title="Православная молодёжь «ПроСветЪ» ВКонтакте"><img class="soc-ic" src="img/vk.png" width="34" height="34" alt="" aria-hidden="true"><span class="soc-t">ПроСветЪ</span></a>
+      </div>
+    </div>
+    </div>
+    <a class="brand" href="index.html" aria-label="Храм Архангела Михаила в Туапсе, на главную">
       <svg viewBox="0 0 120 220" aria-hidden="true"><g fill="none" stroke="#B08D3C" stroke-width="10" stroke-linecap="round"><path d="M60 12V208"/><path d="M42 36H78"/><path d="M18 74H102"/><path d="M40 150L80 166"/></g></svg>
       <b>Храм Архангела Михаила</b>
       <small>в Туапсе</small>
     </a>
-    <nav class="nav" aria-label="Разделы сайта">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="bars" aria-hidden="true"></span><span class="lbl">Меню</span>
+    </button>
+    <nav class="nav" id="site-nav" aria-label="Разделы сайта">
       <a href="index.html" aria-current="page">Главная</a>
       <div class="has-sub"><a href="services.html" aria-haspopup="true">Богослужения</a><ul class="sub"><li><a href="services.html">Расписание</a></li><li><a href="treby.html">Требы и таинства</a></li></ul></div>
       <a href="feasts.html">Праздники</a>
@@ -36,19 +50,24 @@
 
 <main>
   <section class="wrap hero">
-    <div>
-      <p class="eyebrow">Православный приход</p>
-      <h1>Храм <em>Архангела Михаила</em> в Туапсе</h1>
-      <div class="orn left" aria-hidden="true"><i></i></div>
-      <p class="lead">Место молитвы, тишины и доброго общения. Двери открыты для каждого, кто хочет помолиться, исповедаться, задать вопрос или просто побыть в храме.</p>
-      <div class="actions">
-        <a class="btn btn-fill" href="services.html">Богослужения</a>
-        <a class="btn btn-line" href="contacts.html">Как нас найти</a>
-      </div>
-      <div class="feast frame">
-        <span class="lbl">Ближайший праздник</span>
-        <b id="feastName">Собор Архистратига Михаила</b>
-        <span class="when"><span id="feastDate">21 ноября</span>, <span id="feastIn"></span></span>
+    <div class="info">
+      <h1 class="sr-only">Храм Архангела Михаила в Туапсе</h1>
+      <section class="frame next-svc" id="next-service" aria-live="polite">
+        <span class="lbl">Ближайшая служба</span>
+        <div class="next-body"><span class="next-name">Расписание на ближайшие дни скоро появится.</span></div>
+        <a class="more-link" href="services.html">Всё расписание</a>
+      </section>
+      <div class="hours-grid">
+        <article class="frame hours">
+          <span class="lbl">Часы работы храма</span>
+          <b>9:00–18:00</b>
+          <p>В дни служб храм открывается раньше и закрывается позже.</p>
+        </article>
+        <article class="frame hours">
+          <span class="lbl">Церковная лавка</span>
+          <b>9:00–18:00</b>
+          <p>Перерыв 13:00–14:00.</p>
+        </article>
       </div>
     </div>
 
@@ -62,7 +81,35 @@
     </div>
   </section>
 
-  <section class="sec band" id="about">
+  <section class="sec band" id="news">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Новости</p>
+        <h2>Последние новости</h2>
+        <div class="orn" aria-hidden="true"><i></i></div>
+      </div>
+      <div class="news-list">
+        <!-- НОВОСТИ. Чтобы добавить новость, скопируйте блок <article> целиком и вставьте выше или ниже.
+             Самая свежая новость идёт первой. Фото кладите в папку img и укажите его имя в двух местах. -->
+        <article class="frame news-item">
+          <figure class="news-photo">
+            <a class="photo-link" href="img/news-remont.webp">
+              <img src="img/news-remont.webp" width="1400" height="1050" loading="lazy" decoding="async"
+                   alt="Внутри храма во время ремонта: строительные леса у стены, люстра и иконостас">
+            </a>
+          </figure>
+          <div class="news-body">
+            <p class="news-date">14 ноября 2026</p>
+            <h3>Ремонтные работы в храме</h3>
+            <p>Дорогие братья и сестры! В храме ведутся ремонтные работы по покраске стен и потолка. Приносим свои извинения за доставленные неудобства. Службы проводятся по расписанию.</p>
+            <a class="more-link" href="services.html">Расписание богослужений</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="about">
     <div class="wrap about">
       <div>
         <div class="sec-head">
@@ -80,7 +127,7 @@
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec band">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Разделы сайта</p>
@@ -127,6 +174,7 @@
       </div>
     </div>
   </section>
+  <script type="application/json" id="sched-data">{"days":[{"iso":"2026-11-15","d":"15 ноября","w":"Воскресенье","red":true,"rows":[{"s":[["Исповедь","b"]],"t":"8:00","note":"n24"},{"s":[["Божественная Литургия","r"]],"note":"n24"},{"s":[["Акафист Архистратигу Михаилу с молебным пением Господу о воинах, идущих на брань",""]],"t":"16:00"},{"s":[["Воскресная школа для взрослых",""]],"t":"17:00"}]},{"iso":"2026-11-16","d":"16 ноября","w":"Понедельник","red":false,"rows":[{"s":[["Молебен с акафистом о страждущих недугом винопития",""]],"t":"8:00"}]},{"iso":"2026-11-20","d":"20 ноября","w":"Пятница","red":false,"rows":[{"s":[["Водосвятный молебен с акафистным пением Божией Матери",""]],"t":"8:00"},{"s":[["Вечернее Богослужение",""],["Исповедь","b"]],"t":"17:00","note":"nB"}]},{"iso":"2026-11-21","d":"21 ноября","w":"Суббота","red":true,"rows":[{"s":[["Божественная Литургия","r"]],"t":"8:00","tr":1,"note":"nB"},{"s":[["Вечернее Богослужение",""],["Исповедь","b"]],"t":"17:00","note":"nC"}]},{"iso":"2026-11-22","d":"22 ноября","w":"Воскресенье","red":true,"rows":[{"s":[["Исповедь","b"]],"t":"8:00","note":"nC"},{"s":[["Божественная Литургия","r"]],"note":"nC"},{"s":[["Акафист Архистратигу Михаилу с молебным пением Господу о воинах, идущих на брань",""]],"t":"16:00"},{"s":[["Воскресная школа для взрослых",""]],"t":"17:00"}]},{"iso":"2026-11-23","d":"23 ноября","w":"Понедельник","red":false,"rows":[{"s":[["Молебен с акафистом о страждущих недугом винопития",""]],"t":"8:00"}]},{"iso":"2026-11-25","d":"25 ноября","w":"Среда","red":false,"rows":[{"s":[["Вечернее Богослужение",""],["Исповедь","b"]],"t":"17:00","note":"nD"}]},{"iso":"2026-11-26","d":"26 ноября","w":"Четверг","red":false,"rows":[{"s":[["Божественная Литургия",""]],"t":"8:00","note":"nD"}]},{"iso":"2026-11-27","d":"27 ноября","w":"Пятница","red":false,"rows":[{"s":[["Водосвятный молебен с акафистным пением Божией Матери",""]],"t":"8:00"},{"s":[["Вечернее Богослужение",""],["Исповедь","b"]],"t":"17:00","note":"nE"}]},{"iso":"2026-11-28","d":"28 ноября","w":"Суббота","red":false,"rows":[{"s":[["Божественная Литургия",""],["Панихида","b"]],"t":"8:00","note":"nE"},{"s":[["Вечернее Богослужение",""],["Исповедь","b"]],"t":"17:00","note":"nF"}]},{"iso":"2026-11-29","d":"29 ноября","w":"Воскресенье","red":true,"rows":[{"s":[["Исповедь","b"]],"t":"8:00","note":"nF"},{"s":[["Божественная Литургия","r"]],"note":"nF"},{"s":[["Акафист Архистратигу Михаилу с молебным пением Господу о воинах, идущих на брань",""]],"t":"16:00"},{"s":[["Воскресная школа для взрослых",""]],"t":"17:00"}]},{"iso":"2026-11-30","d":"30 ноября","w":"Понедельник","red":false,"rows":[{"s":[["Молебен с акафистом о страждущих недугом винопития",""]],"t":"8:00"}]}],"notes":{"n24":{"text":"Неделя 24-я по Пятидесятнице. Глас 7-й. Мчч. Акинди́на, Пига́сия, Аффо́ния, Елпидифо́ра и Анемподи́ста","red":true},"nB":{"text":"Собор Архистрати́га Миха́ила и прочих Небесных Сил бесплотных. Архангелов Гаври́ила, Рафа́ила, Ури́ила, Селафи́ила, Иегуди́ила, Варахи́ила и Иереми́ила","red":true},"nC":{"text":"Неделя 25-я по Пятидесятнице. Глас 8-й. Иконы Божией Матери, именуемой «Скоропослу́шница»","red":true},"nD":{"text":"Свт. Иоанна Златоуста, архиепископа Константинопольского","red":false},"nE":{"text":"Мучеников и исповедников Гу́рия, Само́на и Ави́ва. Начало Рождественского поста","red":false},"nF":{"text":"Неделя 26-я по Пятидесятнице. Глас 1-й. Апостола и евангелиста Матфе́я","red":true}}}</script>
 </main>
 
 <footer class="wrap">

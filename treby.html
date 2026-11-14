@@ -12,17 +12,31 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
 <link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
 <header class="wrap">
   <div class="top">
-    <a class="brand" href="index.html" aria-label="Приход Архистратига Михаила, на главную">
+    <div class="topbar">
+    <button class="lv-btn" type="button" aria-pressed="false" aria-label="Версия для слабовидящих"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5C6.5 5 2.6 9 1.5 12c1.1 3 5 7 10.5 7s9.400-4 10.500-7C21.400 9 17.500 5 12 5z" fill="none" stroke="currentColor" stroke-width="1.700" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.200" fill="currentColor"/></svg><span class="lv-btn-t">Версия для слабовидящих</span></button>
+    <div class="social">
+      <span class="social-lbl">Наши соцсети:</span>
+      <div class="social-list">
+        <a class="soc" href="https://vk.ru/hramtuapse" target="_blank" rel="noopener" aria-label="Страница храма ВКонтакте" title="Страница храма ВКонтакте"><img class="soc-ic" src="img/vk.png" width="34" height="34" alt="" aria-hidden="true"><span class="soc-t">Храм</span></a>
+        <a class="soc" href="https://vk.ru/prav_molod_tuapse" target="_blank" rel="noopener" aria-label="Православная молодёжь «ПроСветЪ» ВКонтакте" title="Православная молодёжь «ПроСветЪ» ВКонтакте"><img class="soc-ic" src="img/vk.png" width="34" height="34" alt="" aria-hidden="true"><span class="soc-t">ПроСветЪ</span></a>
+      </div>
+    </div>
+    </div>
+    <a class="brand" href="index.html" aria-label="Храм Архангела Михаила в Туапсе, на главную">
       <svg viewBox="0 0 120 220" aria-hidden="true"><g fill="none" stroke="#B08D3C" stroke-width="10" stroke-linecap="round"><path d="M60 12V208"/><path d="M42 36H78"/><path d="M18 74H102"/><path d="M40 150L80 166"/></g></svg>
       <b>Храм Архангела Михаила</b>
       <small>в Туапсе</small>
     </a>
-    <nav class="nav" aria-label="Разделы сайта">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="bars" aria-hidden="true"></span><span class="lbl">Меню</span>
+    </button>
+    <nav class="nav" id="site-nav" aria-label="Разделы сайта">
       <a href="index.html">Главная</a>
       <div class="has-sub"><a href="services.html" aria-current="page" aria-haspopup="true">Богослужения</a><ul class="sub"><li><a href="services.html">Расписание</a></li><li><a href="treby.html" aria-current="page">Требы и таинства</a></li></ul></div>
       <a href="feasts.html">Праздники</a>
@@ -42,38 +56,42 @@
         <h1 class="page-title">Требы и таинства</h1>
         <div class="orn" aria-hidden="true"><i></i></div>
       </div>
-      <p class="intro">Таинства и требы совершаются по договорённости со священником. Чтобы узнать время и порядок, позвоните по телефону <a class="plain" href="tel:+79189113726">+7 (918) 911-37-26</a> или подойдите в храм.</p>
-      <div class="grid grid-3">
-        <article class="frame card">
-          <span class="kicker">Таинство</span>
-          <h3>Крещение</h3>
-          <p>Вхождение в Церковь. Совершается над детьми и взрослыми.</p>
-        </article>
-        <article class="frame card">
-          <span class="kicker">Таинство</span>
-          <h3>Исповедь и причастие</h3>
-          <p>Покаяние перед Богом и причащение Тела и Крови Христовых.</p>
-        </article>
-        <article class="frame card">
-          <span class="kicker">Таинство</span>
-          <h3>Венчание</h3>
-          <p>Благословение Церковью брака мужа и жены.</p>
-        </article>
-        <article class="frame card">
-          <span class="kicker">Таинство</span>
-          <h3>Соборование</h3>
-          <p>Молитва об исцелении болящих, помазание освящённым елеем.</p>
-        </article>
-        <article class="frame card">
-          <span class="kicker">Треба</span>
-          <h3>Панихида</h3>
-          <p>Молитва об упокоении усопших.</p>
-        </article>
-        <article class="frame card">
-          <span class="kicker">Треба</span>
-          <h3>Молебен</h3>
-          <p>Молитва о здравии, о помощи в делах и благодарение Богу.</p>
-        </article>
+      <p class="intro">Время и порядок можно уточнить по телефону <a class="plain" href="tel:+79189113726">+7 (918) 911-37-26</a> или в храме.</p>
+      <div class="treby">
+        <section class="frame t-block">
+          <span class="kicker">Раздел первый</span>
+          <h2>Таинства</h2>
+          <ul class="t-list">
+          <li><span class="tn">Причастие</span></li>
+          <li><span class="tn">Исповедь</span></li>
+          <li><span class="tn">Венчание</span></li>
+          <li><span class="tn">Крещение</span></li>
+          <li><span class="tn">Соборование</span></li>
+          </ul>
+        </section>
+        <section class="frame t-block">
+          <span class="kicker">Раздел второй</span>
+          <h2>Требы</h2>
+          <ul class="t-list">
+          <li><span class="tn">Проскомидия за здравие</span><span class="tp">8 руб. за имя</span></li>
+          <li><span class="tn">Проскомидия за упокоение</span><span class="tp">8 руб. за имя</span></li>
+          <li><span class="tn">Панихида</span><span class="tp">10 руб. за имя</span></li>
+          <li><span class="tn">Ектения за здравие</span><span class="tp">40 руб. за имя</span></li>
+          <li><span class="tn">Ектения за упокой</span><span class="tp">40 руб. за имя</span></li>
+          <li><span class="tn">Молебен</span><span class="tp">10 руб. за имя</span></li>
+          <li><span class="tn">Сорокоуст</span><span class="tp">240 руб. за имя</span></li>
+          <li><span class="tn">Длительное поминовение</span><span class="tp">х руб. за имя</span></li>
+          <li><span class="tn">Отпевание</span><span class="tp">х руб.</span></li>
+          </ul>
+        </section>
+        <section class="frame t-block">
+          <span class="kicker">Раздел третий</span>
+          <h2>Освящение</h2>
+          <ul class="t-list">
+          <li><span class="tn">Освящение жилища, транспорта, вещей</span></li>
+          </ul>
+          <p class="t-note">Обговаривается напрямую со священником.</p>
+        </section>
       </div>
     </div>
   </section>
