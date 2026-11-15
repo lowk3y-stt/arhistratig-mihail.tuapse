@@ -297,16 +297,16 @@
     lvPanel.setAttribute('aria-label', 'Настройки версии для слабовидящих');
     lvPanel.innerHTML =
       '<div class="wrap lv-in">' +
-      '<div class="lv-grp"><span>Размер шрифта:</span>' +
-      '<button type="button" data-k="size" data-v="1" style="font-size:1rem" aria-label="Мелкий">А</button>' +
-      '<button type="button" data-k="size" data-v="2" style="font-size:1.25rem" aria-label="Средний">А</button>' +
-      '<button type="button" data-k="size" data-v="3" style="font-size:1.5rem" aria-label="Крупный">А</button></div>' +
-      '<div class="lv-grp"><span>Цвета:</span>' +
+      '<div class="lv-grp"><span class="lv-lbl">Размер шрифта</span><div class="lv-seg">' +
+      '<button type="button" data-k="size" data-v="1" aria-label="Мелкий шрифт"><i style="font-size:1rem">А</i></button>' +
+      '<button type="button" data-k="size" data-v="2" aria-label="Средний шрифт"><i style="font-size:1.3rem">А</i></button>' +
+      '<button type="button" data-k="size" data-v="3" aria-label="Крупный шрифт"><i style="font-size:1.65rem">А</i></button></div></div>' +
+      '<div class="lv-grp"><span class="lv-lbl">Цвета</span><div class="lv-seg">' +
       '<button type="button" data-k="color" data-v="light">Чёрное на белом</button>' +
-      '<button type="button" data-k="color" data-v="dark">Жёлтое на чёрном</button></div>' +
-      '<div class="lv-grp"><span>Изображения:</span>' +
+      '<button type="button" data-k="color" data-v="dark">Жёлтое на чёрном</button></div></div>' +
+      '<div class="lv-grp"><span class="lv-lbl">Изображения</span><div class="lv-seg">' +
       '<button type="button" data-k="img" data-v="true">Включены</button>' +
-      '<button type="button" data-k="img" data-v="false">Выключены</button></div>' +
+      '<button type="button" data-k="img" data-v="false">Выключены</button></div></div>' +
       '<button type="button" class="lv-off">Обычная версия</button></div>';
     document.body.insertBefore(lvPanel, document.body.firstChild);
     lvPanel.addEventListener('click', function (e) {

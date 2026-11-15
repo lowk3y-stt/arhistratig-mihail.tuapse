@@ -435,13 +435,18 @@ footer .orn { margin-bottom: 22px; }
 a.plain[href^="tel"] { white-space: nowrap; }
 
 /* ---------- Версия для слабовидящих ---------- */
-.lv-panel { background: var(--bg); border-bottom: 2px solid var(--gold-deep); }
-.lv-in { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; padding-block: 12px; }
-.lv-grp { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.lv-grp > span { font: 500 1rem/1.2 var(--text); color: var(--ink); }
-.lv-panel button { cursor: pointer; background: var(--bg); color: var(--ink); border: 1px solid var(--gold-deep); border-radius: 2px; padding: 6px 12px; font: 500 1rem/1.2 var(--text); min-height: 40px; }
-.lv-panel button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
-.lv-panel .lv-off { margin-left: auto; }
+.lv-panel { background: var(--paper); border-bottom: 2px solid var(--gold-deep); }
+.lv-in { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); gap: 16px 28px; align-items: end; padding-block: 16px; }
+.lv-grp { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.lv-lbl { font: 600 0.95rem/1.2 var(--text); color: var(--ink); }
+.lv-seg { display: flex; }
+.lv-panel button { cursor: pointer; background: var(--bg); color: var(--ink); border: 1px solid var(--gold-deep); padding: 8px 12px; font: 500 1rem/1.2 var(--text); min-height: 44px; }
+.lv-seg button { flex: 1 1 0; min-width: 0; margin-left: -1px; border-radius: 0; }
+.lv-seg button:first-child { margin-left: 0; border-radius: 3px 0 0 3px; }
+.lv-seg button:last-child { border-radius: 0 3px 3px 0; }
+.lv-seg i { font-style: normal; font-weight: 600; line-height: 1; }
+.lv-panel button[aria-pressed="true"] { background: var(--ink); color: var(--bg); position: relative; z-index: 1; }
+.lv-panel .lv-off { border-radius: 3px; font-weight: 600; }
 html.lv { font-size: 125%; --display: Arial, Helvetica, sans-serif; --text: Arial, Helvetica, sans-serif; }
 html.lv.lv-s2 { font-size: 150%; }
 html.lv.lv-s3 { font-size: 175%; }
@@ -459,3 +464,9 @@ html.lv-noimg img:not(.soc-ic), html.lv-noimg .arch { display: none !important; 
 html.lv-noimg .hero { grid-template-columns: minmax(0, 1fr); }
 html.lv .topbar { position: static; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
 html.lv .topbar { width: 100%; } @media (max-width: 1060px) { .topbar { width: 100%; } }
+
+.card .big-time { font: 600 clamp(2rem, 4.5vw, 2.6rem)/1.1 var(--display); color: var(--gold-ink); margin: 6px 0 0; }
+
+.t-list .tp-soft { font-weight: 500; font-size: 1rem; text-align: right; white-space: normal; }
+.t-note { border-top: 1px solid var(--line); padding-top: 16px; max-width: 40rem; margin-inline: auto; }
+@media (max-width: 520px) { .t-list .tp { white-space: normal; } .t-list .tp-soft { text-align: left; } }
