@@ -61,7 +61,8 @@
         var t = r.t || last;
         if (r.t) last = r.t;
         if (day.iso === todayIso && t && toMin(t) + GRACE_HOURS * 60 <= nowMin) return;
-        rows.push({ t: r.t || null, tShown: t, tr: r.tr, s: r.s, note: r.note });
+        /* строка без времени, например «служба отменена», это объявление, а не служба */
+        rows.push({ t: r.t || null, tShown: t, tr: r.tr, s: r.s, note: r.note, notice: !t });
       });
       /* если у первой оставшейся строки время унаследовано, показываем его явно */
       if (rows.length && !rows[0].t && rows[0].tShown) rows[0].t = rows[0].tShown;
@@ -179,8 +180,14 @@
   if (nextBox) {
     var body = nextBox.querySelector('.next-body');
     body.textContent = '';
-    if (sch && sch.days.length) {
-      var d0 = sch.days[0], r0 = d0.rows[0];
+    var d0 = null, r0 = null;
+    if (sch) {
+      /* ближайшая служба: первая строка с временем, объявления («служба отменена») пропускаем */
+      sch.days.some(function (d) {
+        return d.rows.some(function (r) { if (!r.notice) { d0 = d; r0 = r; return true; } return false; });
+      });
+    }
+    if (d0) {
       var dd = parseInt(d0.iso.slice(8), 10), diff = dd - now.getDate();
       var when = d0.iso === todayIso ? 'Сегодня' : diff === 1 && d0.iso.slice(5, 7) === pad(now.getMonth() + 1) ? 'Завтра' : d0.d;
       body.appendChild(el('span', 'next-when', when + (when === d0.d ? '' : ', ' + d0.d) + ', ' + d0.w.toLowerCase()));
@@ -270,12 +277,12 @@
   var root = document.documentElement;
   var lvBtn = document.querySelector('.lv-btn');
   var lvState = { on: false, size: 1, color: 'light', img: true };
-  try { var saved = JSON.parse(localStorage.getItem('lv') || 'null'); if (saved) lvState = saved; } catch (e) {}
+  try { var saved = JSON.parse(localStorage.getItem('lv') || 'null'); if (saved) { lvState = saved; if (lvState.color !== 'soft') lvState.color = 'light'; } } catch (e) {}
   var lvPanel = null;
   function lvSave() { try { localStorage.setItem('lv', JSON.stringify(lvState)); } catch (e) {} }
   function lvApply() {
     root.classList.toggle('lv', lvState.on);
-    ['lv-s1', 'lv-s2', 'lv-s3', 'lv-light', 'lv-dark', 'lv-noimg'].forEach(function (c) { root.classList.remove(c); });
+    ['lv-s1', 'lv-s2', 'lv-s3', 'lv-light', 'lv-soft', 'lv-noimg'].forEach(function (c) { root.classList.remove(c); });
     if (lvState.on) {
       root.classList.add('lv-s' + lvState.size, 'lv-' + lvState.color);
       if (!lvState.img) root.classList.add('lv-noimg');
@@ -303,7 +310,7 @@
       '<button type="button" data-k="size" data-v="3" aria-label="Крупный шрифт"><i style="font-size:1.65rem">А</i></button></div></div>' +
       '<div class="lv-grp"><span class="lv-lbl">Цвета</span><div class="lv-seg">' +
       '<button type="button" data-k="color" data-v="light">Чёрное на белом</button>' +
-      '<button type="button" data-k="color" data-v="dark">Жёлтое на чёрном</button></div></div>' +
+      '<button type="button" data-k="color" data-v="soft">Обычные цвета</button></div></div>' +
       '<div class="lv-grp"><span class="lv-lbl">Изображения</span><div class="lv-seg">' +
       '<button type="button" data-k="img" data-v="true">Включены</button>' +
       '<button type="button" data-k="img" data-v="false">Выключены</button></div></div>' +

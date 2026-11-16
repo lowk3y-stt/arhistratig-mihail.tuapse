@@ -20,7 +20,7 @@
   --glow: rgba(236, 205, 125, 0.65);
   --display: 'Cormorant Garamond', 'Times New Roman', serif;
   --text: 'EB Garamond', Georgia, 'Times New Roman', serif;
-  color-scheme: light;
+  color-scheme: light only;
 }
 
 * { box-sizing: border-box; }
@@ -451,7 +451,6 @@ html.lv { font-size: 125%; --display: Arial, Helvetica, sans-serif; --text: Aria
 html.lv.lv-s2 { font-size: 150%; }
 html.lv.lv-s3 { font-size: 175%; }
 html.lv-light { --bg: #fff; --paper: #fff; --beige: #fff; --beige-deep: #eee; --ink: #000; --ink-soft: #000; --gold: #000; --gold-deep: #000; --gold-ink: #000; --line: #000; --shadow: transparent; --glow: transparent; }
-html.lv-dark { --bg: #000; --paper: #000; --beige: #000; --beige-deep: #222; --ink: #fff; --ink-soft: #fff; --gold: #ffd633; --gold-deep: #ffd633; --gold-ink: #ffd633; --line: #ffd633; --shadow: transparent; --glow: transparent; color-scheme: dark; }
 html.lv body { line-height: 1.6; }
 html.lv *, html.lv *::before, html.lv *::after { letter-spacing: normal !important; animation: none !important; transition: none !important; font-style: normal !important; }
 html.lv .frame::after, html.lv .arch-sun, html.lv .arch-ring, html.lv .arch-frame { display: none; }
@@ -470,3 +469,5 @@ html.lv .topbar { width: 100%; } @media (max-width: 1060px) { .topbar { width: 1
 .t-list .tp-soft { font-weight: 500; font-size: 1rem; text-align: right; white-space: normal; }
 .t-note { border-top: 1px solid var(--line); padding-top: 16px; max-width: 40rem; margin-inline: auto; }
 @media (max-width: 520px) { .t-list .tp { white-space: normal; } .t-list .tp-soft { text-align: left; } }
+
+html { color-scheme: light only; }
