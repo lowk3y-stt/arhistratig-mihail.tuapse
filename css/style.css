@@ -514,34 +514,42 @@ html.lv .sl-btn:hover { background: var(--ink); color: var(--bg); }
 .yi-side { display: none; }
 @media (min-width: 961px) { .yi-side { display: grid; } }
 
-/* ---------- Молодёжь на компьютерах: вверху фото слева, время и куратор справа; ниже вся информация ---------- */
+/* ---------- Молодёжь: заголовок справа над карточками ---------- */
+.yl-aside .sec-head { margin: 0 auto 24px; }
 @media (min-width: 961px) {
   .yl-photos { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: clamp(24px, 3vw, 40px); align-items: stretch; margin-bottom: clamp(32px, 5vw, 56px); }
-  .yl-photos .slider-frame { max-width: none; margin: 0; }
+  .yl-photos .slider-frame { max-width: none; margin: 0; align-self: start; }
+  .yl-aside { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+  .yl-aside .sec-head { margin-bottom: 20px; }
+  .yl-aside h1 { font-size: clamp(1.9rem, 3vw, 2.6rem); }
   .yi-bottom { display: none; }
-  .yi-side { max-width: none; margin: 0; grid-template-columns: minmax(0, 1fr); grid-template-rows: 1fr 1fr; gap: 20px; }
-  .yi-side .card { display: flex; flex-direction: column; justify-content: center; padding: 22px 24px; }
-  .yi-side .card h3 { margin: 8px 0 10px; }
+  .yi-side { max-width: none; margin: 0; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .yi-side .card { padding: 18px 22px; }
+  .yi-side .card h3 { margin: 6px 0 8px; }
   .yi-side .card p { margin: 0; }
 }
+@media (max-width: 960px) { .yl-photos { display: flex; flex-direction: column; } .yl-aside { order: -1; } }
 
-/* Чёрно-жёлтая тема для слабовидящих */
-html.lv-dark { color-scheme: dark; --bg: #000; --paper: #000; --beige: #000; --beige-deep: #1a1a1a; --ink: #FFE600; --ink-soft: #FFE600; --gold: #FFE600; --gold-deep: #FFE600; --gold-ink: #FFE600; --line: #FFE600; --shadow: transparent; --glow: transparent; }
-html.lv-dark body { background: #000; color: #FFE600; }
-html.lv-dark .btn-fill, html.lv-dark .today-badge, html.lv-dark .lv-btn, html.lv-dark .lv-btn:hover { background: #FFE600; color: #000; border-color: #FFE600; }
-html.lv-dark .sl-btn, html.lv-dark .sl-count { background: #000; color: #FFE600; border-color: #FFE600; }
-html.lv-dark .sl-btn:hover { background: #FFE600; color: #000; }
-html.lv-dark .lv-panel button[aria-pressed="true"] { background: #FFE600; color: #000; }
+/* ---------- Фотографии: альбомы ---------- */
+.albums { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 340px)); justify-content: center; gap: 28px; }
+.album-card { display: block; text-decoration: none; color: inherit; padding: 10px; background: var(--paper); transition: transform .3s ease, box-shadow .3s ease; }
+.album-card:hover { transform: translateY(-3px); box-shadow: 0 16px 30px -22px var(--shadow); }
+.album-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.ac-t { display: block; text-align: center; padding: 14px 8px 8px; }
+.ac-t b { display: block; font: 600 1.35rem/1.2 var(--display); color: var(--ink); }
+.ac-t small { display: block; margin-top: 6px; font: 500 0.82rem/1.2 var(--text); letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); }
+.album-bar { text-align: center; margin-bottom: clamp(24px, 4vw, 40px); }
+.album-bar h2 { font: 500 clamp(1.8rem, 4vw, 2.6rem)/1.15 var(--display); margin: 14px 0 0; text-wrap: balance; }
+.album-back { display: inline-block; font: 500 0.82rem/1 var(--text); letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-deep); text-decoration: none; padding: 12px 18px; border: 1px solid var(--gold); border-radius: 2px; }
+.album-back:hover { background: var(--gold-deep); color: #fff; }
+html.lv .album-back:hover { background: var(--ink); color: var(--bg); }
+html:not(.albums-on) .album-back { display: none; }
 
-/* Кнопки стопки фото появляются при наведении курсора (на сенсорных экранах видны всегда) */
-@media (hover: hover) {
-  .slider .sl-btn { opacity: 0; transition: opacity .25s, background .25s, color .25s; }
-  .slider:hover .sl-btn, .slider:focus-within .sl-btn { opacity: 1; }
-}
+.vh { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+main > .sec:first-child, main > section.sec:first-child { padding-top: clamp(20px, 1.9vw, 28px); }
 
 /* Меньше пустого места под шапкой */
-main > .hero, main > section:first-child > .hero { padding-top: clamp(4px, 1.5vw, 16px); }
-main > .sec:first-child, main > section.sec:first-child { padding-top: clamp(24px, 3.5vw, 44px); }
 .top { margin-bottom: clamp(8px, 1.5vw, 16px); }
-@media (min-width: 901px) { main > .hero { align-items: start; } .hero .info { margin-top: clamp(24px, 4vw, 60px); } }
-@media (min-width: 901px) { main > .hero { margin-top: -56px; } .hero .info { margin-top: clamp(40px, 5vw, 72px); } }
+main > .hero { padding-top: clamp(4px, 1.5vw, 16px); }
+@media (min-width: 901px) { main > .hero { align-items: start; margin-top: -70px; } .hero .info { margin-top: clamp(40px, 5vw, 72px); } }

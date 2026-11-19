@@ -390,3 +390,22 @@
     });
   }
 })();
+
+/* Фотографии: альбомы открываются как вкладки на этой же странице */
+(function () {
+  var albums = document.querySelectorAll('.album');
+  if (!albums.length) return;
+  var page = document.querySelector('.albums');
+  function show() {
+    var id = (location.hash || '').replace('#', ''), found = null;
+    Array.prototype.forEach.call(albums, function (a) {
+      var on = a.id === id; a.hidden = !on; if (on) found = a;
+    });
+    page.hidden = !!found;
+    var note = document.querySelector('.albums-note'); if (note) note.hidden = !!found;
+    if (found) window.scrollTo(0, 0);
+  }
+  document.documentElement.classList.add('albums-on');
+  window.addEventListener('hashchange', show);
+  show();
+})();
