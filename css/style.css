@@ -195,6 +195,7 @@ table.sched { width: 100%; border-collapse: collapse; table-layout: fixed; font-
     color: var(--gold-deep); background: transparent; border: 1px solid var(--gold); border-radius: 2px; cursor: pointer;
   }
   html.js .nav-toggle:hover { background: var(--beige); }
+  html.js .top { padding-bottom: 20px; }
   .nav-toggle .bars { position: relative; width: 18px; height: 11px; border-block: 1px solid currentColor; }
   .nav-toggle .bars::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: currentColor; }
 
@@ -471,3 +472,76 @@ html.lv .topbar { width: 100%; } @media (max-width: 1060px) { .topbar { width: 1
 @media (max-width: 520px) { .t-list .tp { white-space: normal; } .t-list .tp-soft { text-align: left; } }
 
 html { color-scheme: light only; }
+
+/* ---------- Молодёжное движение: карусель фотографий и текст ---------- */
+.slider-frame { padding: 14px; max-width: 920px; margin: 0 auto clamp(32px, 5vw, 52px); }
+.slider { position: relative; }
+.slides { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.slides::-webkit-scrollbar { display: none; }
+.slides:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 4px; }
+.slide { flex: 0 0 100%; scroll-snap-align: center; scroll-snap-stop: always; aspect-ratio: 4 / 3; display: block; background: var(--beige); overflow: hidden; }
+.slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.slide.fit-contain img { object-fit: contain; }
+.sl-btn {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 46px; height: 46px; padding: 0; cursor: pointer;
+  border-radius: 50%; border: 1px solid var(--gold); background: rgba(255, 255, 255, 0.92); color: var(--gold-deep);
+  display: grid; place-items: center; transition: background .25s, color .25s;
+}
+.sl-btn::before { content: ""; width: 11px; height: 11px; border: solid currentColor; border-width: 0 0 2px 2px; display: block; }
+.sl-prev { left: 12px; } .sl-prev::before { transform: translateX(2px) rotate(45deg); }
+.sl-next { right: 12px; } .sl-next::before { transform: translateX(-2px) rotate(-135deg); }
+.sl-btn:hover { background: var(--gold-deep); color: #fff; }
+.sl-count { position: absolute; right: 12px; bottom: 12px; margin: 0; padding: 3px 12px; background: rgba(255, 255, 255, 0.92); border: 1px solid var(--line); font: 500 0.95rem/1.5 var(--text); color: var(--ink); }
+.prose { max-width: 46rem; margin-inline: auto; }
+.prose p { margin: 0 0 1.1em; font-size: 1.2rem; color: var(--ink); }
+.prose-end { text-align: center; margin-top: clamp(32px, 5vw, 56px); }
+.principles .card { text-align: left; padding: 30px 28px 28px; }
+.principles .card h3 { font-size: 1.35rem; margin-top: 0; }
+.principles .card p { margin: 0; }
+.youth-info { max-width: 800px; margin: clamp(28px, 4vw, 44px) auto 0; }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: 22px; }
+.gallery-grid .photo { padding: 10px; }
+.gallery-grid .photo img { aspect-ratio: 4 / 3; height: auto; object-fit: cover; }
+.gallery-grid .photo figcaption { font-size: 0.95rem; padding-top: 10px; }
+html.lv .sl-btn, html.lv .sl-count { background: var(--bg); color: var(--ink); border-color: var(--ink); }
+html.lv .sl-btn:hover { background: var(--ink); color: var(--bg); }
+@media (prefers-reduced-motion: no-preference) { .slides { scroll-behavior: smooth; } }
+.principles { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; }
+.principles .card { flex: 1 1 280px; max-width: calc(33.333% - 16px); }
+@media (max-width: 960px) { .principles .card { max-width: calc(50% - 12px); } }
+@media (max-width: 640px) { .principles .card { max-width: 100%; flex-basis: 100%; } }
+
+.yi-side { display: none; }
+@media (min-width: 961px) { .yi-side { display: grid; } }
+
+/* ---------- Молодёжь на компьютерах: вверху фото слева, время и куратор справа; ниже вся информация ---------- */
+@media (min-width: 961px) {
+  .yl-photos { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: clamp(24px, 3vw, 40px); align-items: stretch; margin-bottom: clamp(32px, 5vw, 56px); }
+  .yl-photos .slider-frame { max-width: none; margin: 0; }
+  .yi-bottom { display: none; }
+  .yi-side { max-width: none; margin: 0; grid-template-columns: minmax(0, 1fr); grid-template-rows: 1fr 1fr; gap: 20px; }
+  .yi-side .card { display: flex; flex-direction: column; justify-content: center; padding: 22px 24px; }
+  .yi-side .card h3 { margin: 8px 0 10px; }
+  .yi-side .card p { margin: 0; }
+}
+
+/* Чёрно-жёлтая тема для слабовидящих */
+html.lv-dark { color-scheme: dark; --bg: #000; --paper: #000; --beige: #000; --beige-deep: #1a1a1a; --ink: #FFE600; --ink-soft: #FFE600; --gold: #FFE600; --gold-deep: #FFE600; --gold-ink: #FFE600; --line: #FFE600; --shadow: transparent; --glow: transparent; }
+html.lv-dark body { background: #000; color: #FFE600; }
+html.lv-dark .btn-fill, html.lv-dark .today-badge, html.lv-dark .lv-btn, html.lv-dark .lv-btn:hover { background: #FFE600; color: #000; border-color: #FFE600; }
+html.lv-dark .sl-btn, html.lv-dark .sl-count { background: #000; color: #FFE600; border-color: #FFE600; }
+html.lv-dark .sl-btn:hover { background: #FFE600; color: #000; }
+html.lv-dark .lv-panel button[aria-pressed="true"] { background: #FFE600; color: #000; }
+
+/* Кнопки стопки фото появляются при наведении курсора (на сенсорных экранах видны всегда) */
+@media (hover: hover) {
+  .slider .sl-btn { opacity: 0; transition: opacity .25s, background .25s, color .25s; }
+  .slider:hover .sl-btn, .slider:focus-within .sl-btn { opacity: 1; }
+}
+
+/* Меньше пустого места под шапкой */
+main > .hero, main > section:first-child > .hero { padding-top: clamp(4px, 1.5vw, 16px); }
+main > .sec:first-child, main > section.sec:first-child { padding-top: clamp(24px, 3.5vw, 44px); }
+.top { margin-bottom: clamp(8px, 1.5vw, 16px); }
+@media (min-width: 901px) { main > .hero { align-items: start; } .hero .info { margin-top: clamp(24px, 4vw, 60px); } }
+@media (min-width: 901px) { main > .hero { margin-top: -56px; } .hero .info { margin-top: clamp(40px, 5vw, 72px); } }

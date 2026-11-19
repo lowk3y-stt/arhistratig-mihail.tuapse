@@ -277,12 +277,12 @@
   var root = document.documentElement;
   var lvBtn = document.querySelector('.lv-btn');
   var lvState = { on: false, size: 1, color: 'light', img: true };
-  try { var saved = JSON.parse(localStorage.getItem('lv') || 'null'); if (saved) { lvState = saved; if (lvState.color !== 'soft') lvState.color = 'light'; } } catch (e) {}
+  try { var saved = JSON.parse(localStorage.getItem('lv') || 'null'); if (saved) { lvState = saved; if (lvState.color !== 'soft' && lvState.color !== 'dark') lvState.color = 'light'; } } catch (e) {}
   var lvPanel = null;
   function lvSave() { try { localStorage.setItem('lv', JSON.stringify(lvState)); } catch (e) {} }
   function lvApply() {
     root.classList.toggle('lv', lvState.on);
-    ['lv-s1', 'lv-s2', 'lv-s3', 'lv-light', 'lv-soft', 'lv-noimg'].forEach(function (c) { root.classList.remove(c); });
+    ['lv-s1', 'lv-s2', 'lv-s3', 'lv-light', 'lv-soft', 'lv-dark', 'lv-noimg'].forEach(function (c) { root.classList.remove(c); });
     if (lvState.on) {
       root.classList.add('lv-s' + lvState.size, 'lv-' + lvState.color);
       if (!lvState.img) root.classList.add('lv-noimg');
@@ -310,7 +310,8 @@
       '<button type="button" data-k="size" data-v="3" aria-label="Крупный шрифт"><i style="font-size:1.65rem">А</i></button></div></div>' +
       '<div class="lv-grp"><span class="lv-lbl">Цвета</span><div class="lv-seg">' +
       '<button type="button" data-k="color" data-v="light">Чёрное на белом</button>' +
-      '<button type="button" data-k="color" data-v="soft">Обычные цвета</button></div></div>' +
+      '<button type="button" data-k="color" data-v="soft">Обычные цвета</button>' +
+      '<button type="button" data-k="color" data-v="dark">Жёлтое на чёрном</button></div></div>' +
       '<div class="lv-grp"><span class="lv-lbl">Изображения</span><div class="lv-seg">' +
       '<button type="button" data-k="img" data-v="true">Включены</button>' +
       '<button type="button" data-k="img" data-v="false">Выключены</button></div></div>' +
@@ -328,6 +329,27 @@
     lvBtn.addEventListener('click', function () { lvState.on = !lvState.on; lvSave(); lvApply(); });
     lvApply();
   }
+
+  /* Карусель фотографий: стрелки, свайп, стрелки клавиатуры */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-slider]'), function (sl) {
+    var track = sl.querySelector('.slides');
+    var count = track.children.length;
+    var prev = sl.querySelector('.sl-prev'), next = sl.querySelector('.sl-next');
+    var cur = sl.querySelector('.sl-cur');
+    prev.hidden = false; next.hidden = false;
+    function idx() { return Math.round(track.scrollLeft / track.clientWidth); }
+    function go(i) {
+      i = (i + count) % count;
+      track.scrollTo({ left: i * track.clientWidth });
+    }
+    prev.addEventListener('click', function () { go(idx() - 1); });
+    next.addEventListener('click', function () { go(idx() + 1); });
+    track.addEventListener('scroll', function () { cur.textContent = idx() + 1; }, { passive: true });
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx() - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(idx() + 1); }
+    });
+  });
 
   /* Просмотр фотографий: щелчок по снимку открывает его крупно.
      Без скрипта ссылка просто открывает файл. */
