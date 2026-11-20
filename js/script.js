@@ -409,3 +409,32 @@
   window.addEventListener('hashchange', show);
   show();
 })();
+
+/* Престольный праздник: Собор Архистратига Михаила (21 ноября).
+   Праздничное оформление включается сам с 20 по 22 ноября по московскому времени.
+   Чтобы посмотреть его в любой день, откройте страницу с «?prestol» в конце адреса. */
+(function () {
+  var d;
+  try {
+    var p = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Moscow', month: 'numeric', day: 'numeric' }).formatToParts(new Date()), v = {};
+    p.forEach(function (x) { v[x.type] = parseInt(x.value, 10); });
+    d = { m: v.month, d: v.day };
+  } catch (e) { var n = new Date(); d = { m: n.getMonth() + 1, d: n.getDate() }; }
+  var on = (d.m === 11 && d.d >= 20 && d.d <= 22) || /[?&]prestol\b/.test(location.search);
+  if (!on) return;
+  var header = document.querySelector('header');
+  if (!header) return;
+  document.documentElement.classList.add('prestol');
+  var star = '<svg class="pf-star" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 2l4.2 11.8L36 18l-11.8 4.2L20 34l-4.2-11.8L4 18l11.8-4.2z" fill="currentColor"/></svg>';
+  var sword = '<svg class="pf-sword" viewBox="0 0 450 892" aria-hidden="true"><defs><linearGradient id="pfg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBE8A6"/><stop offset=".5" stop-color="#E2BC5C"/><stop offset="1" stop-color="#B98C32"/></linearGradient></defs><path fill="url(#pfg)" d="M145 0 L141 1 L137 9 L137 34 L143 70 L134 94 L133 118 L140 143 L155 166 L155 170 L129 186 L114 186 L91 166 L90 139 L83 122 L72 113 L49 113 L41 117 L27 131 L11 162 L5 192 L0 238 L2 297 L9 356 L28 446 L28 484 L23 511 L30 515 L33 520 L29 542 L20 570 L25 571 L32 566 L37 568 L37 575 L31 592 L12 623 L14 628 L20 628 L28 621 L32 621 L34 628 L22 646 L19 655 L6 668 L4 674 L6 676 L15 674 L21 665 L42 647 L53 614 L64 554 L66 522 L65 461 L69 452 L67 396 L71 390 L74 390 L77 394 L83 456 L91 505 L108 579 L108 585 L104 589 L77 599 L68 608 L62 620 L57 650 L63 676 L49 690 L41 716 L43 725 L41 738 L44 746 L42 759 L45 764 L43 784 L47 796 L55 795 L73 777 L79 760 L92 749 L109 750 L125 764 L123 782 L126 804 L122 820 L107 846 L87 865 L81 877 L82 886 L90 891 L99 890 L113 883 L128 861 L138 852 L148 847 L150 842 L150 807 L155 796 L157 778 L167 755 L172 750 L184 745 L192 751 L204 766 L202 774 L204 806 L199 843 L206 847 L219 846 L231 850 L250 863 L255 864 L258 862 L263 849 L237 823 L231 804 L234 801 L248 802 L261 782 L353 538 L370 499 L374 498 L379 505 L381 544 L386 572 L397 605 L414 631 L413 644 L416 646 L446 646 L449 644 L449 641 L441 636 L417 610 L403 581 L403 578 L408 575 L427 595 L434 592 L431 582 L416 560 L408 539 L410 530 L422 541 L427 540 L427 534 L413 501 L415 494 L424 492 L424 486 L414 462 L411 436 L411 382 L419 294 L421 214 L416 176 L405 141 L387 117 L375 118 L366 102 L361 100 L341 102 L332 109 L327 118 L324 135 L325 151 L320 166 L296 192 L280 197 L272 196 L261 187 L259 182 L277 167 L287 155 L295 139 L300 120 L299 93 L290 69 L280 55 L267 43 L251 34 L232 28 L197 29 L163 44 L159 38 L154 7Z"/></svg>';
+  var b = document.createElement('aside');
+  b.className = 'pf-banner';
+  b.setAttribute('aria-label', 'Престольный праздник');
+  b.innerHTML =
+    '<div class="pf-in">' + sword +
+    '<div class="pf-tx"><p class="pf-k">' + star + '<span>Престольный праздник</span>' + star + '</p>' +
+    '<p class="pf-h">С праздником Собора Архистратига Михаила!</p>' +
+    '<p class="pf-s">Собор Архистратига Михаила и прочих Небесных Сил бесплотных · 21 ноября</p>' +
+    '<p class="pf-l"><a href="services.html">Расписание богослужений</a></p></div>' + sword + '</div>';
+  if (document.querySelector('.hero')) header.parentNode.insertBefore(b, header.nextSibling);
+})();

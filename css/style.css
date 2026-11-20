@@ -54,7 +54,6 @@ a { color: inherit; }
 .top {
   display: flex; flex-direction: column; align-items: center; text-align: center;
   padding-top: max(26px, env(safe-area-inset-top, 0px));
-  border-bottom: 3px double var(--line);
 }
 .brand { display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; }
 .brand svg { width: 20px; height: 36px; }
@@ -550,6 +549,59 @@ html:not(.albums-on) .album-back { display: none; }
 main > .sec:first-child, main > section.sec:first-child { padding-top: clamp(20px, 1.9vw, 28px); }
 
 /* Меньше пустого места под шапкой */
-.top { margin-bottom: clamp(8px, 1.5vw, 16px); }
+header.wrap::after { content: ""; display: block; width: 100vw; margin-left: calc(50% - 50vw); height: 3px; border-block: 1px solid var(--line); margin-bottom: clamp(8px, 1.5vw, 16px); }
+html, body { overflow-x: clip; }
+.nav { padding-block: 14px 8px; }
 main > .hero { padding-top: clamp(4px, 1.5vw, 16px); }
 @media (min-width: 901px) { main > .hero { align-items: start; margin-top: -70px; } .hero .info { margin-top: clamp(40px, 5vw, 72px); } }
+
+
+/* ---------- Престольный праздник: красно-золотое оформление ---------- */
+html.prestol { --red: #721A33; --red-deep: #470B1C; --gold-hi: #F1D88C; }
+html.prestol:not(.lv) body { border-top: 7px solid var(--red); border-image: linear-gradient(90deg, var(--red-deep), var(--gold) 25%, var(--red) 50%, var(--gold) 75%, var(--red-deep)) 1; }
+html.prestol:not(.lv) header.wrap::after { height: 4px; border-top: 2px solid var(--red); border-bottom: 1px solid var(--gold); background: none; }
+html.prestol:not(.lv) .nav a:hover, html.prestol:not(.lv) .nav a[aria-current="page"] { border-color: var(--red); }
+html.prestol:not(.lv) .frame { border-color: var(--red); }
+html.prestol:not(.lv) .frame::after { border-color: var(--gold); }
+html.prestol:not(.lv) .orn i { background: var(--red); }
+html.prestol:not(.lv) .orn::before { background: linear-gradient(90deg, transparent, var(--red)); }
+html.prestol:not(.lv) .orn::after { background: linear-gradient(270deg, transparent, var(--red)); }
+html.prestol:not(.lv) .btn-fill { background: linear-gradient(180deg, var(--red), var(--red-deep)); border-color: var(--red-deep); }
+html.prestol:not(.lv) .btn-line, html.prestol:not(.lv) .album-back { border-color: var(--red); }
+html.prestol:not(.lv) .arch-frame { border-color: var(--red); }
+html.prestol:not(.lv) .arch-ring { border-color: var(--gold); }
+html.prestol:not(.lv) .lv-btn { border-color: var(--red); }
+
+.pf-banner { position: relative; width: min(1100px, calc(100% - 32px)); margin: 4px auto 10px; text-align: center; color: var(--gold-hi); overflow: hidden;
+  padding: 22px 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, #8C2A47 0%, transparent 70%),
+    linear-gradient(180deg, #6E1730, #43091A);
+  border: 2px solid #D9B45A; box-shadow: 0 0 0 4px #FFFFFF, 0 0 0 5px #721A33, 0 18px 30px -22px rgba(71, 11, 28, .8); }
+.pf-banner::before { content: ""; position: absolute; inset: 4px; border: 1px solid rgba(241, 216, 140, .55); pointer-events: none; }
+.pf-banner::after { content: ""; position: absolute; top: 0; bottom: 0; width: 34%; left: -50%; pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255, 233, 160, .28), transparent); animation: pfShine 7s ease-in-out infinite; }
+@keyframes pfShine { 0%, 55% { left: -50%; } 100% { left: 130%; } }
+.pf-in { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: clamp(14px, 4vw, 44px); padding: 6px clamp(14px, 3vw, 36px); }
+.pf-sword { flex: none; width: 64px; height: 127px; filter: drop-shadow(0 0 7px rgba(255, 220, 120, .4)); }
+.pf-in .pf-sword:last-child { transform: scaleX(-1); }
+.pf-tx { min-width: 0; }
+.pf-tx p { margin: 0; }
+.pf-k { display: flex; align-items: center; justify-content: center; gap: 12px; font: 500 0.8rem/1.2 var(--text); letter-spacing: 0.28em; text-transform: uppercase; color: #E7C766; }
+.pf-star { width: 14px; height: 14px; color: #E7C766; flex: none; }
+.pf-h { font: 600 clamp(1.5rem, 3.6vw, 2.4rem)/1.15 var(--display); color: #FFF3CF; margin: 8px 0 6px !important; text-wrap: balance; text-shadow: 0 1px 0 rgba(40, 4, 14, .6); }
+.pf-s { font: 400 1.05rem/1.4 var(--text); color: #F6E2B0; text-wrap: balance; }
+.pf-l { margin-top: 12px !important; }
+.pf-l a { display: inline-block; font: 500 0.8rem/1 var(--text); letter-spacing: 0.2em; text-transform: uppercase; color: #FFF3CF; text-decoration: none; border: 1px solid #E7C766; padding: 10px 18px; border-radius: 2px; transition: background .25s, color .25s; }
+.pf-l a:hover { background: #E7C766; color: #43091A; }
+html.prestol:not(.lv) .arch-sun { background: radial-gradient(circle, rgba(236, 190, 90, .55) 0%, transparent 66%); }
+@media (max-width: 560px) { .pf-sword { display: none; } .pf-k { letter-spacing: 0.18em; font-size: 0.72rem; } .pf-banner { padding: 28px 0; } }
+@media (prefers-reduced-motion: reduce) { .pf-banner::after { display: none; } }
+html.lv .pf-banner { background: var(--bg); border: 2px solid var(--ink); box-shadow: none; color: var(--ink); }
+html.lv .pf-banner::before, html.lv .pf-banner::after { display: none; }
+html.lv .pf-sword path { fill: var(--ink); }
+html.lv .pf-k, html.lv .pf-h, html.lv .pf-s, html.lv .pf-star { color: var(--ink); text-shadow: none; filter: none; }
+html.lv .pf-l a { color: var(--ink); border-color: var(--ink); }
+html.prestol:not(.lv) .nav-toggle { border-color: var(--red); }
+
+@media (max-width: 560px) { .pf-sword { display: none; } }
