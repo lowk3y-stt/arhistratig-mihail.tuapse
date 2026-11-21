@@ -638,3 +638,7 @@ html.lv .angel-logo { background: #fff; }
   -webkit-mask-image: none !important; mask-image: none !important; filter: drop-shadow(0 14px 18px rgba(60, 40, 10, .18)); }
 .gallery { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
 .gallery .photo img { width: 100%; height: auto; }
+
+/* Купол не заходит под шапку: убираем подтягивание вверх */
+@media (min-width: 901px) { main > .hero { margin-top: -44px; padding-top: 24px; } .hero .info { margin-top: clamp(24px, 4vw, 56px); } }
+.arch { overflow: visible; }
